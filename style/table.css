@@ -1,0 +1,76 @@
+table{
+	width:100%;
+	table-layout: fixed;
+	border: 1px solid grey;
+}
+
+.tableContainer{
+	width: 70%;
+	height:430px;
+	margin-top: 35px;
+	margin-right: auto;
+	margin-left: auto;
+	background: #3e3e3e;
+	font-family: verdana;
+	border-top: 3px dashed #212121;
+}
+
+.tbl-header{
+	margin-top: 40px;
+	background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+	height:300px;
+	overflow-x:auto;
+	margin-top: 0px;
+	font-size: 60%;
+}
+.tbl-topbar{
+	border: 1px solid grey;
+	overflow-x: false;
+	font-size: 80%;
+}
+th{
+	font-family: verdana;
+	padding: 10px 15px;
+	text-align: left;
+	font-weight: 400;
+	font-size: 12px;
+	color: #fff;
+	text-transform: uppercase;
+}
+th:hover {
+  background-color: #ddd;
+  color: black;
+}
+td{
+	font-family: verdana;
+	padding: 10px;
+	text-align: left;
+	vertical-align:middle;
+	font-weight: 300;
+	font-size: 12px;
+	color: #fff;
+	border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+.line:hover {
+  background-color: #ddd;
+  color: black;
+}
+.line:hover .lineseg { color: black; }
+
+.lineActive {
+  background-color: #3c753c;
+}
+.lineActive .lineseg { color: black; }
+
+/* for custom scrollbar for webkit browser*/
+::-webkit-scrollbar {
+    width: 6px;
+} 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+} 
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+}
