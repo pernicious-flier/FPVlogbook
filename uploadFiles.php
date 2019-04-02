@@ -16,8 +16,9 @@ if (!file_exists('blackbox-tools/logs')) {
 	mkdir('blackbox-tools/logs', 0777);
 }
 	
+set_time_limit(180);	//set php timeout at 3min
 $filename = $_FILES['file']['name'];
-$ext = pathinfo($filename, PATHINFO_EXTENSION);
+$ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 if ($ext == 'gpx') 
 {
 	if(move_uploaded_file($_FILES['file']['tmp_name'], 'files/gpx/'.$_FILES['file']['name']))
@@ -56,7 +57,6 @@ elseif($ext == 'txt')
 		fwrite($myfile, $out);
 		fclose($myfile);
 				
-		$GPSlinesAfterDecimation = 2000;
 		//decimate the .gps.csv file
 		$handle = fopen('files/csv/' . pathinfo($filename, PATHINFO_FILENAME) . ".01.gps.csv", "r")or die("Unable to open file!");
 		$linenum = 0;
@@ -67,33 +67,27 @@ elseif($ext == 'txt')
 		  $linecount++;
 		}
 		fclose($handle);
-		if($linecount>$GPSlinesAfterDecimation)
-		{
-			$division= intval($linecount/$GPSlinesAfterDecimation);//divide in order to have GPSlinesAfterDecimation samples
-			$CSVlinesAfterDecimation  = $GPSlinesAfterDecimation;
-		}
-		else
-		{
-			$division = 1;
-			$CSVlinesAfterDecimation = $linecount;//this is in order to have same lines of gps and csv data
-		}
 		
-		$i = 1;
 		$handle = fopen('files/csv/' . pathinfo($filename, PATHINFO_FILENAME) . ".01.gps.csv", "r")or die("Unable to open file!");
 		if ($handle) {
 			$out = fgets($handle); 	//skip title bar
-			while (($line = fgets($handle)) !== false) {
-				if($i == $division)
+			if (($line = fgets($handle)) !== false)	//get the first line
+			{				
+				$out = $line;
+				$temp = explode(",", $line);
+				$time0 = intval(substr($temp[0], 0, -6));//downsize to 1Hz
+				while (($line = fgets($handle)) !== false) 
 				{
-					$out = $out.$line;
-					$i=1;
+					$temp = explode(",", $line);
+					$time1 = intval(substr($temp[0], 0, -6));//downsize to 1Hz
+					if($time1 > $time0)
+					{
+						$time0 = $time1;
+						$out = $out.$line;
+					}
 				}
-				else 
-				{ $i++;}
-			}
-		} else {
-			// error opening the file.
-		} 
+			} 
+		}
 		fclose($handle);		
 		$myfile = fopen('files/csv/' . pathinfo($filename, PATHINFO_FILENAME) . ".01.gps.csv", "w") or die("Unable to open file!");
 		fwrite($myfile, $out);
@@ -109,25 +103,27 @@ elseif($ext == 'txt')
 		  $linecount++;
 		}
 		fclose($handle);
-		if($linecount>$CSVlinesAfterDecimation) $division= intval($linecount/$CSVlinesAfterDecimation);//divide in order to have CSVlinesAfterDecimation samples
-		else $division = 1;
-		
-		$i = 1;
+
 		$handle = fopen('files/csv/' . pathinfo($filename, PATHINFO_FILENAME) . ".01.csv", "r")or die("Unable to open file!");
 		if ($handle) {
 			$out = fgets($handle); 	//skip title bar
-			while (($line = fgets($handle)) !== false) {
-				if($i == $division)
+			if (($line = fgets($handle)) !== false)	//get the first line
+			{				
+				$out = $line;
+				$temp = explode(",", $line);
+				$time0 = intval(substr($temp[1], 0, -6));//downsize to 1Hz
+				while (($line = fgets($handle)) !== false) 
 				{
-					$out = $out.$line;
-					$i=1;
+					$temp = explode(",", $line);
+					$time1 = intval(substr($temp[1], 0, -6));//downsize to 1Hz
+					if($time1 > $time0)
+					{
+						$time0 = $time1;
+						$out = $out.$line;
+					}
 				}
-				else 
-				{ $i++;}
-			}
-		} else {
-			// error opening the file.
-		} 
+			} 
+		}
 		fclose($handle);		
 		$myfile = fopen('files/csv/' . pathinfo($filename, PATHINFO_FILENAME) . ".01.csv", "w") or die("Unable to open file!");
 		fwrite($myfile, $out);

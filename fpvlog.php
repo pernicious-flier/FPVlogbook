@@ -201,6 +201,7 @@ function selectFPVlog()
 	
 	document.getElementById("activityDiv").innerHTML  = ""; 
 	document.getElementById("dataBox").innerHTML  = mapBoxHTML1 ; 
+	
 	DB_select("date_act","DESC");	
 }
 
@@ -230,6 +231,5 @@ function onload(){
 	selectFPVlog();
 }
 
-</script>
 </script>
 <script  type="text/javascript" src="js/js_functions.js"></script>

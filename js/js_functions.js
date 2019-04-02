@@ -82,7 +82,7 @@ function deleteAct(id)
 			if( !('error' in obj) ) {
 				//alert(obj.result);
 				DB_select("date_act","DESC");
-				loadGPS(null);
+				loadGPS(null,1,0);
 			} else {
 				//console.log(obj.error);
 				//alert("error");
@@ -95,8 +95,6 @@ function deleteAct(id)
 
 function downloadAct(id)
 {
-	//link = window.open('blackbox-tools/logs/flavio_1551776793873.txt');
-			
 	var res;
 	jQuery.ajax({
 		type: "POST",
@@ -127,7 +125,7 @@ function loadActivity(id)
 var track;
 var MarkerActPos;
 var map = new L.Map("mapBox", {center: new L.LatLng(44.4639937, 9.1019311), zoom: 11, scrollWheelZoom: false});
-function loadGPS(filename){	
+function loadGPS(filename,start,end){	
 	//alert(filename);
 	var res;
 	var i;
@@ -163,9 +161,12 @@ function loadGPS(filename){
 			if( !('error' in obj) ) {
 				res = obj.result;
 				//alert(res[1]['lat']+" - " +res[1]['lon']);
-				for(i=1;i<res.length;i++)
+				if(end==0) end = res.length;
+				var t=0;
+				for(i=start;i<end;i++)
 				{
-					GPSdata[i-1] = new L.LatLng(res[i]['lat'], res[i]['lon']);
+					GPSdata[t] = new L.LatLng(res[i]['lat'], res[i]['lon']);
+					t++;
 				}
 				track = new L.Polyline(GPSdata, {
 					color: 'red',
@@ -175,7 +176,7 @@ function loadGPS(filename){
 				});
 				track.addTo(map);
 				var MarkerStartPos = new L.marker(GPSdata[0], {icon: startMarker}).addTo(map);
-				var MarkerEndPos = new L.marker(GPSdata[i-2], {icon: endMarker}).addTo(map);
+				var MarkerEndPos = new L.marker(GPSdata[t-2], {icon: endMarker}).addTo(map);
 				MarkerActPos = new L.marker([track.getLatLngs()[0].lat,track.getLatLngs()[0].lng], {icon: posMarker}).addTo(map);
 				var group = new L.featureGroup([MarkerStartPos,track]);
 				map.fitBounds(group.getBounds());
@@ -215,7 +216,7 @@ function ajax_file_upload(file_obj) {
 		//var newfilename = "<?php echo $_SESSION['username'] ?>"+"_"+d.valueOf();
 		var newfilename = sessionStorage.getItem("username")+"_"+d.valueOf();
 		var fileindex = '';
-		if(extension=="txt")
+		if(extension=="txt" || extension=="TXT")
 		{
 			form_data.append('file', file_obj, (newfilename+".txt"));
 			fileindex = ".01";
@@ -235,7 +236,7 @@ function ajax_file_upload(file_obj) {
 				{	
 					DB_insert(newfilename+fileindex);
 					DB_select("date_act","DESC");
-					loadGPS(newfilename+fileindex+".gpx");
+					loadGPS(newfilename+fileindex+".gpx",1,0);
 					$('#selectfile').val('');
 				}
 				document.getElementById('loader').innerHTML = "";	
@@ -323,7 +324,7 @@ function DB_loadActivity(id) {
 				document.getElementById("max_spd").innerHTML = "Maximum GPS Speed: <span><font color=limegreen>" + (res[0][9]*3.6).toFixed(2)  + " Km/h</span>";
 				document.getElementById("min_rssi").innerHTML = "Minimum RSSI: <span><font color=limegreen>" + (res[0][10]).toFixed(2) + " %</span>";
 				if(document.getElementById("notes")) document.getElementById("notes").value = res[0][12];
-				loadGPS(res[0][11]);
+				loadGPS(res[0][11],1,0);
 				document.getElementById("location").innerHTML = "Location: <span><font color=limegreen>" + res[0][5] + "</span>"; 
 			} else {
 				//console.log(obj.error);
@@ -629,69 +630,28 @@ function decimate(dataIn,N)
 	return dataOut;
 }
 
-function decodeModes(dataIn, N)
+function decodeModes(dataIn)
 {
 	var dataOut = new Array;
-	var j=1, t=1;
-	for(var i=1;i<=dataIn.length;i++)
-	{
-		if(j < N)
-		{ 
-			j++;
-		}
-		else 
-		{
-			switch(dataIn[t])
-			{
-				case " ANGLE_MODE":
-					dataOut[t] = 1;
-					break;
-				case " HORIZON_MODE":
-					dataOut[t] = 2;
-					break;
-				case " HEADING_MODE":
-					dataOut[t] = 3;
-					break;
-				case " NAV_ALTHOLD_MODE":
-					dataOut[t] = 4;
-					break;
-				case " NAV_RTH_MODE":
-					dataOut[t] = 5;
-					break;
-				case " NAV_POSHOLD_MODE":
-					dataOut[t] = 6;
-					break;
-				case " HEADFREE_MODE":
-					dataOut[t] = 7;
-					break;
-				case " NAV_LAUNCH_MODE":
-					dataOut[t] = 8;
-					break;
-				case " MANUAL_MODE":
-					dataOut[t] = 9;
-					break;
-				case " FAILSAFE_MODE":
-					dataOut[t] = 10;
-					break;
-				case " AUTO_TUNE":
-					dataOut[t] = 11;
-					break;
-				case " NAV_WP_MODE":
-					dataOut[t] = 12;
-					break;
-				case " NAV_CRUISE_MODE":
-					dataOut[t] = 13;
-					break;
-				case " FLAPERON":
-					dataOut[t] = 14;
-					break;
-				default:
-					dataOut[t] = 0;
-					break;
-			}
-			t++;
-			j=1;
-		}
+	var t=1;
+	for(var i=2;i<=dataIn.length;i++)
+	{		
+		dataOut[t] = 0;
+		if(dataIn[t].includes('ANGLE_MODE')) dataOut[t] += 1;
+		if(dataIn[t].includes('HORIZON_MODE')) dataOut[t] += 2;
+		if(dataIn[t].includes('HEADING_MODE')) dataOut[t] += 3;
+		if(dataIn[t].includes('NAV_ALTHOLD_MODE')) dataOut[t] += 4;
+		if(dataIn[t].includes('NAV_RTH_MODE')) dataOut[t] += 5;
+		if(dataIn[t].includes('NAV_POSHOLD_MODE')) dataOut[t] += 6;
+		if(dataIn[t].includes('HEADFREE_MODE')) dataOut[t] += 7;
+		if(dataIn[t].includes('NAV_LAUNCH_MODE')) dataOut[t] += 8;
+		if(dataIn[t].includes("MANUAL_MODE")) dataOut[t] += 9;
+		if(dataIn[t].includes("FAILSAFE_MODE")) dataOut[t] += 10;
+		if(dataIn[t].includes("AUTO_TUNE")) dataOut[t] += 11;
+		if(dataIn[t].includes("NAV_WP_MODE")) dataOut[t] += 12;
+		if(dataIn[t].includes("NAV_CRUISE_MODE")) dataOut[t] += 13;
+		if(dataIn[t].includes("FLAPERON")) dataOut[t] += 14;
+		t++;
 	}
 	return dataOut;
 }
@@ -748,7 +708,7 @@ function plotDraw(dataArray)
 	};
 	
 	var mode = dataArray.map(function(value,index) { return value['mode']; });
-	var modeDec = decodeModes(mode,20);
+	var modeDec = decodeModes(mode);
 	var modeTrace = {
 	  y: modeDec, 
 	  mode: 'lines', 
@@ -770,8 +730,32 @@ var myPlot = document.getElementById('graphDiv'),
 
 Plotly.newPlot('graphDiv', data, layout, {showSendToCloud: false, displaylogo: false, responsive: true});
 
+var start=1;
+var end=0;
+myPlot.on('plotly_relayout', function(eventdata){	
+	if(!eventdata['xaxis.range[0]']) { start = 1; }
+	else { start = parseInt(eventdata['xaxis.range[0]']); }
+	if(!eventdata['xaxis.range[1]']) { end = 0; }
+	else { end = parseInt(eventdata['xaxis.range[1]']); }
+	//alert( 'ZOOM!' + '\n\n' + 'Event data:' + '\n' + JSON.stringify(eventdata) + '\n\n' + 'x-axis start:' + start + '\n' + 'x-axis end:' + end );
+
+	jQuery.ajax({
+		type: "POST",
+		url: 'functions.php',
+		dataType: 'json',
+		timeout: 60000, // sets timeout to 60 seconds
+		data: {functionname: 'loadActivity', arguments: activityID},
+		success: function (obj, textstatus) {
+			if( !('error' in obj) ) {
+				var res = obj.result;
+				loadGPS(res[0][11],start,end);
+			} 
+		}
+	});	
+});
+
 myPlot.on('plotly_hover', function(data){	
-	var xpos = data.points[0]['x'];
+	var xpos = data.points[0]['x']-start;
 	rotateImage("compass",yaw[parseInt(xpos)]);
 	rotateImage("pitch",pitch[parseInt(xpos)]);
 	rotateImage("roll",roll[parseInt(xpos)]);

@@ -207,9 +207,9 @@ body {
 }
 
 .loader {
-	position: absolute;
-	left: 45vw;
-	top: 25vw;
+	position: fixed;
+	left: 45%;
+	top: 50%;
 	z-index:10000;
 	border: 16px solid #f3f3f3;
 	border-radius: 50%;

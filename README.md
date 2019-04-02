@@ -1,8 +1,8 @@
 # FPV logbook
+
 Every pilot needs a logbook for its flight, but writing down everything is boring and you couldn't write everything. 
 This project is for people like me, that would like to have every single flight logged with every detail, but doesn't like to write it down when it's time!
-
-![Rendered flight log frame](screenshots/history.jpg)
+The FPV logbook works with INAV blackbox log files with GPS data.
 
 ## Getting Started
 
@@ -53,8 +53,6 @@ Now you can go back to the login page and finally enter the website!
 
 ### What you can do with your logs
 
-![Rendered flight log frame](screenshots/activity.jpg)
-
 You have two main pages, "History" and "Activity"
 
 In History you have a table with all your logs. You can order it as you want, delate and download your uploaded logs. To upload a new log you just have to drag&drop the file over the table.
@@ -85,7 +83,7 @@ Under the flight data you have the flight controller setup variables (like pids,
 
 ## Authors
 
-* **pernicious-flier** - *Initial work* - [FPVlogbook](https://github.com/flavioansovini/FPVlogbook)
+* **Flavio Ansovini** - *Initial work* - [FPVlogbook](https://github.com/flavioansovini/FPVlogbook)
 
 ## License
 

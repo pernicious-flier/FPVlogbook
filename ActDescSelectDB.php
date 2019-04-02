@@ -1,6 +1,5 @@
 <?php 
 require('dbinit.php');
-
 $aResult = array();
 $var = $_POST['arguments'];
 
