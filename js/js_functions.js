@@ -726,7 +726,8 @@ var myPlot = document.getElementById('graphDiv'),
 		traceorder: 'reversed', 
 		font: {size: 16}, 
 		yref: 'paper'
-	}};
+		}
+    };
 
 Plotly.newPlot('graphDiv', data, layout, {showSendToCloud: false, displaylogo: false, responsive: true});
 
@@ -752,6 +753,34 @@ myPlot.on('plotly_relayout', function(eventdata){
 			} 
 		}
 	});	
+});
+
+myPlot.on('plotly_doubleclick', function() {
+	jQuery.ajax({
+		type: "POST",
+		url: 'functions.php',
+		dataType: 'json',
+		timeout: 60000, // sets timeout to 60 seconds
+		data: {functionname: 'loadActivity', arguments: activityID},
+		success: function (obj, textstatus) {
+			if( !('error' in obj) ) {
+				var res = obj.result;
+				loadGPS(res[0][11],1,0);
+			} 
+		}
+	});	
+});
+
+//set the IMU indicators if a touch device is used
+myPlot.on('plotly_click', function(data){	
+	if("ontouchstart" in document.documentElement)
+	{
+    	var xpos = data.points[0]['x']-start;
+    	rotateImage("compass",yaw[parseInt(xpos)]);
+    	rotateImage("pitch",pitch[parseInt(xpos)]);
+    	rotateImage("roll",roll[parseInt(xpos)]);
+    	placePosMarker(track.getLatLngs()[xpos].lat,track.getLatLngs()[xpos].lng);
+	}
 });
 
 myPlot.on('plotly_hover', function(data){	
