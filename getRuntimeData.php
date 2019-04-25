@@ -13,18 +13,21 @@ $handle = fopen($file, "r");
 $i = 1;
 $handle = fopen($file, "r");
 if ($handle) {
+	$line = fgets($handle);
+	$titles = str_getcsv($line, ",");
+	
 	while (($line = fgets($handle)) !== false) {
 		$line = str_getcsv($line, ","); //parse the items in rows 
 		$result[] = 
 				 array(
-				 'alt' => (float)$line[34],
-				 'rssi' => (float)$line[35],
-				 'vbat' =>  (float)$line[30],
-				 'pitch' =>  (float)$line[42],
-				 'roll' =>  (float)$line[43],
-				 'yaw' =>  (float)$line[44],
-				 'thr' =>  (float)$line[45],
-				 'mode' =>  $line[67]
+				 'alt' => (float)$line[array_search(" BaroAlt (cm)",$titles)],//$line[34],
+				 'rssi' => (float)$line[array_search(" rssi",$titles)],
+				 'vbat' =>  (float)$line[array_search(" vbat",$titles)],
+				 'pitch' =>  (float)$line[array_search(" attitude[0]",$titles)],
+				 'roll' =>  (float)$line[array_search(" attitude[1]",$titles)],
+				 'yaw' =>  (float)$line[array_search(" attitude[2]",$titles)],
+				 'thr' =>  (float)$line[array_search(" motor[0]",$titles)],
+				 'mode' =>  $line[array_search(" flightModeFlags (flags)",$titles)]
 		);	
 	}
 	fclose($handle);
