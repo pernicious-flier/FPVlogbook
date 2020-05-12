@@ -22,9 +22,9 @@ if ($handle) {
 				 array(
 				 'alt' => (float)$line[array_search(" BaroAlt (cm)",$titles)],//$line[34],
 				 'rssi' => (float)$line[array_search(" rssi",$titles)],
-				 'vbat' =>  (float)$line[array_search(" vbat",$titles)],
-				 'pitch' =>  (float)$line[array_search(" attitude[0]",$titles)],
-				 'roll' =>  (float)$line[array_search(" attitude[1]",$titles)],
+				 'vbat' =>  (float)$line[array_search(" vbat (V)",$titles)],
+				 'roll' =>  (float)$line[array_search(" attitude[0]",$titles)],
+				 'pitch' =>  (float)$line[array_search(" attitude[1]",$titles)],
 				 'yaw' =>  (float)$line[array_search(" attitude[2]",$titles)],
 				 'thr' =>  (float)$line[array_search(" motor[0]",$titles)],
 				 'mode' =>  $line[array_search(" flightModeFlags (flags)",$titles)]

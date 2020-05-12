@@ -51,10 +51,10 @@ $minRSSI = 0;
 $file = "files/csv/".$var[0][1].".gps.csv";
 $csvData = file_get_contents($file);
 $data = str_getcsv($csvData, "\n"); //parse the rows
-$alt=10000;
+$alt=0;
 foreach ($data as &$row) {
 	$row = str_getcsv($row, ","); //parse the items in rows 
-	if((float)$row[5]<$alt && (float)$row[5]>0) $alt = (float)$row[5];		
+	if($alt == 0) $alt = (float)$row[5];		
 	if((float)$row[6]>$spdMax) $spdMax = (float)$row[6];	
 }
 
@@ -68,10 +68,11 @@ $flightTimeT0 = 0;
 $flightTime = 0;
 foreach ($data as &$row) {	
 	$row = str_getcsv($row, ","); //parse the items in rows 
-	if($j==0) { $flightTimeT0=$row[1]; $j++; }
+	if($j==0) {$j++;}
+	else if ($j==1)	{ $flightTimeT0=$row[1]; $j++; }
 	else { $flightTime=$row[1]; }
-	if(((float)$row[34]/100)>$altMax) $altMax = (float)$row[34]/100;	
-	if((float)$row[35]<$minRSSI && (float)$row[35]>0) $minRSSI = (float)$row[35];	
+	if(((float)$row[32]/100)>$altMax) $altMax = (float)$row[32]/100;	
+	if((float)$row[33]<$minRSSI && (float)$row[33]>0) $minRSSI = (float)$row[33];	
 }
 $input = ($flightTime - $flightTimeT0)/1000000;
 $hours = floor($input/3600);

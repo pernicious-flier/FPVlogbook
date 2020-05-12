@@ -8,7 +8,7 @@ date_default_timezone_set('Europe/London');
 //database credentials
 define('DBHOST','localhost');
 define('DBUSER','root');
-define('DBPASS','password');
+define('DBPASS','usbw');
 define('DBNAME','fpvlog');
 
 try {
