@@ -186,7 +186,7 @@ if(!preg_match("/(".$searchfor."):(.*)/",$contents,$acc_notch_hz)){$acc_notch_hz
 $searchfor = " acc_notch_cutoff";
 if(!preg_match("/(".$searchfor."):(.*)/",$contents,$acc_notch_cutoff)){$acc_notch_cutoff = "NULL";}
 $searchfor = " gyro_stage2_lowpass_hz";
-if(!preg_match("/(".$searchfor."):(.*)/",$contents,$gyro_stage2_lowpass_hz)){$gyro_stage2_lowpass_hz = "12345";}//"NULL";}
+if(!preg_match("/(".$searchfor."):(.*)/",$contents,$gyro_stage2_lowpass_hz)){$gyro_stage2_lowpass_hz = "NULL";}
 $searchfor = " pidSumLimit";
 if(!preg_match("/(".$searchfor."):(.*)/",$contents,$pidSumLimit)){$pidSumLimit = "NULL";}
 $searchfor = " acc_hardware";

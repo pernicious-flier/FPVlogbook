@@ -16,21 +16,42 @@ if ($handle) {
 	$line = fgets($handle);
 	$titles = str_getcsv($line, ",");
 	
-	while (($line = fgets($handle)) !== false) {
-		$line = str_getcsv($line, ","); //parse the items in rows 
-		$result[] = 
-				 array(
-				 'alt' => (float)$line[array_search(" BaroAlt (cm)",$titles)],//$line[34],
-				 'rssi' => (float)$line[array_search(" rssi",$titles)],
-				 'vbat' =>  (float)$line[array_search(" vbat",$titles)],
-				 'roll' =>  (float)$line[array_search(" attitude[0]",$titles)],
-				 'pitch' =>  (float)$line[array_search(" attitude[1]",$titles)],
-				 'yaw' =>  (float)$line[array_search(" attitude[2]",$titles)],
-				 'thr' =>  (float)$line[array_search(" motor[0]",$titles)],
-				 'mode' =>  $line[array_search(" flightModeFlags (flags)",$titles)]
-		);	
+	if(array_search(" vbat (V)",$titles)==NULL) //this is for BBX tools < 0.4.4
+	{
+		while (($line = fgets($handle)) !== false) {
+			$line = str_getcsv($line, ","); //parse the items in rows 
+			$result[] = 
+					 array(
+					 'alt' => (float)$line[array_search(" BaroAlt (cm)",$titles)],//$line[34],
+					 'rssi' => (float)$line[array_search(" rssi",$titles)],
+					 'vbat' =>  (float)$line[array_search(" vbat",$titles)]/100,
+					 'roll' =>  (float)$line[array_search(" attitude[0]",$titles)],
+					 'pitch' =>  (float)$line[array_search(" attitude[1]",$titles)],
+					 'yaw' =>  (float)$line[array_search(" attitude[2]",$titles)],
+					 'thr' =>  (float)$line[array_search(" motor[0]",$titles)],
+					 'mode' =>  $line[array_search(" flightModeFlags (flags)",$titles)]
+			);	
+		}
+		fclose($handle);
 	}
-	fclose($handle);
+	else //this is for BBX tools >= 0.4.4
+	{
+		while (($line = fgets($handle)) !== false) {
+			$line = str_getcsv($line, ","); //parse the items in rows 
+			$result[] = 
+					 array(
+					 'alt' => (float)$line[array_search(" BaroAlt (cm)",$titles)],//$line[34],
+					 'rssi' => (float)$line[array_search(" rssi",$titles)],
+					 'vbat' =>  (float)$line[array_search(" vbat (V)",$titles)],
+					 'roll' =>  (float)$line[array_search(" attitude[0]",$titles)],
+					 'pitch' =>  (float)$line[array_search(" attitude[1]",$titles)],
+					 'yaw' =>  (float)$line[array_search(" attitude[2]",$titles)],
+					 'thr' =>  (float)$line[array_search(" motor[0]",$titles)],
+					 'mode' =>  $line[array_search(" flightModeFlags (flags)",$titles)]
+			);	
+		}
+		fclose($handle);
+	}			
 } else {
 	// error opening the file.
 } 

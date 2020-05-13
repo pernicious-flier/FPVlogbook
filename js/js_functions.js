@@ -688,9 +688,9 @@ function plotDraw(dataArray)
 	};
 	
 	var vbat = dataArray.map(function(value,index) { return value['vbat']; });
-	var vbatDec = vbat.map(function(x) { return x/100; }); //normalize
+	
 	var vbatTrace = {
-	  y: vbatDec, 
+	  y: vbat, 
 	  mode: 'lines', 
 	  name: 'V Bat (V)', 
 	  line: {shape: 'spline'}, 
