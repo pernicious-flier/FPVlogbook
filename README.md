@@ -18,6 +18,8 @@ However, if you like to have a local and portable version of the logbook, you co
 - blackbox-tools
 - INAV or Betaflight log files with GPS coordinates
 
+- For portable use and easiest setup USBWebServer will work just fine: https://www.usbwebserver.net/webserver/
+
 ### Installing
 
 I'm not going to explain how to setup a webserver from scratch.. you can find tons of tutorial online. 
@@ -34,7 +36,7 @@ define('DBUSER','root');
 define('DBPASS','xxxxxxxxx');
 define('DBNAME','fpvlog');
 
-The "FPV logbook" use the blackbox-tools software in order to convert the log files, for this reason you have to download and place it within the "www" folder.
+The "FPV logbook" use the blackbox-tools software in order to convert the log files, for this reason you have to download and place it within the "www" folder. Blackbox tools 0.4.4 is needed to work properly https://github.com/iNavFlight/blackbox-tools/releases/tag/v0.4.4.
 The folder that contain the blackbox-tools has to be called "blackbox-tools"...
 If your server is based on linux you should compile the software and place the executable file in the same folder.
 Depending on your OS you also have to modify the file "uploadFiles.php" and comment/decomment the rows 37/38.

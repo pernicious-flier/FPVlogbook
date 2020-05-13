@@ -106,7 +106,7 @@ elseif($ext == 'txt')
 
 		$handle = fopen('files/csv/' . pathinfo($filename, PATHINFO_FILENAME) . ".01.csv", "r")or die("Unable to open file!");
 		if ($handle) {
-			$out = fgets($handle); 	//skip title bar
+			//$out = fgets($handle); 	//skip title bar
 			if (($line = fgets($handle)) !== false)	//get the first line
 			{				
 				$out = $line;

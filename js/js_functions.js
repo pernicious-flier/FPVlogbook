@@ -515,50 +515,50 @@ function DB_loadFCparam(id) {
 			if( !('error' in obj) ) {
 				res = obj.result;
 				//alert(res[0][7]);
-				document.getElementById("P_interval").innerHTML = "P_interval: <span><font color=limegreen>" + res[0][1] + "</span>";
-				document.getElementById("minthrottle").innerHTML = "minthrottle: <span><font color=limegreen>" + res[0][2] + "</span>";
-				document.getElementById("maxthrottle").innerHTML = "maxthrottle: <span><font color=limegreen>" + res[0][3] + "</span>";
-				document.getElementById("looptime").innerHTML = "looptime: <span><font color=limegreen>" + res[0][4] + "</span>";
-				document.getElementById("rc_rate").innerHTML = "rc_rate: <span><font color=limegreen>" + res[0][5] + "</span>";
-				document.getElementById("rc_expo").innerHTML = "rc_expo: <span><font color=limegreen>" + res[0][6] + "</span>";
-				document.getElementById("rc_yaw_expo").innerHTML = "rc_yaw_expo: <span><font color=limegreen>" + res[0][7] + "</span>";
-				document.getElementById("thr_mid").innerHTML = "thr_mid: <span><font color=limegreen>" + res[0][8] + "</span>";
-				document.getElementById("thr_expo").innerHTML = "thr_expo: <span><font color=limegreen>" + res[0][9] + "</span>";
-				document.getElementById("tpa_rate").innerHTML = "tpa_rate: <span><font color=limegreen>" + res[0][10] + "</span>";
-				document.getElementById("tpa_breakpoint").innerHTML = "tpa_breakpoint: <span><font color=limegreen>" + res[0][11] + "</span>";
-				document.getElementById("rates").innerHTML = "rates: <span><font color=limegreen>" + res[0][12] + "</span>";
-				document.getElementById("rollPID").innerHTML = "rollPID: <span><font color=limegreen>" + res[0][13] + "</span>";
-				document.getElementById("pitchPID").innerHTML = "pitchPID: <span><font color=limegreen>" + res[0][14] + "</span>";
-				document.getElementById("yawPID").innerHTML = "yawPID: <span><font color=limegreen>" + res[0][15] + "</span>";
-				document.getElementById("altPID").innerHTML = "altPID: <span><font color=limegreen>" + res[0][16] + "</span>";
-				document.getElementById("posPID").innerHTML = "posPID: <span><font color=limegreen>" + res[0][17] + "</span>";
-				document.getElementById("posrPID").innerHTML = "posrPID: <span><font color=limegreen>" + res[0][18] + "</span>";
-				document.getElementById("levelPID").innerHTML = "levelPID: <span><font color=limegreen>" + res[0][19] + "</span>";
-				document.getElementById("magPID").innerHTML = "magPID: <span><font color=limegreen>" + res[0][20] + "</span>";
-				document.getElementById("velPID").innerHTML = "velPID: <span><font color=limegreen>" + res[0][21] + "</span>";
-				document.getElementById("yaw_p_limit").innerHTML = "yaw_p_limit: <span><font color=limegreen>" + res[0][22] + "</span>";
-				document.getElementById("yaw_lpf_hz").innerHTML = "yaw_lpf_hz: <span><font color=limegreen>" + res[0][23] + "</span>";
-				document.getElementById("dterm_lpf_hz").innerHTML = "dterm_lpf_hz: <span><font color=limegreen>" + res[0][24] + "</span>";
-				document.getElementById("dterm_notch_hz").innerHTML = "dterm_notch_hz: <span><font color=limegreen>" + res[0][25] + "</span>";
-				document.getElementById("dterm_notch_cutoff").innerHTML = "dterm_notch_cutoff: <span><font color=limegreen>" + res[0][26] + "</span>";
-				document.getElementById("deadband").innerHTML = "deadband: <span><font color=limegreen>" + res[0][27] + "</span>";
-				document.getElementById("yaw_deadband").innerHTML = "yaw_deadband: <span><font color=limegreen>" + res[0][28] + "</span>";
-				document.getElementById("gyro_lpf").innerHTML = "gyro_lpf: <span><font color=limegreen>" + res[0][29] + "</span>";
-				document.getElementById("gyro_lpf_hz").innerHTML = "gyro_lpf_hz: <span><font color=limegreen>" + res[0][30] + "</span>";
-				document.getElementById("gyro_notch_hz").innerHTML = "gyro_notch_hz: <span><font color=limegreen>" + res[0][31] + "</span>";
-				document.getElementById("gyro_notch_cutoff").innerHTML = "gyro_notch_cutoff: <span><font color=limegreen>" + res[0][32] + "</span>";
-				document.getElementById("acc_lpf_hz").innerHTML = "acc_lpf_hz: <span><font color=limegreen>" + res[0][33] + "</span>";
-				document.getElementById("acc_notch_hz").innerHTML = "acc_notch_hz: <span><font color=limegreen>" + res[0][34] + "</span>";
-				document.getElementById("acc_notch_cutoff").innerHTML = "acc_notch_cutoff: <span><font color=limegreen>" + res[0][35] + "</span>";
-				document.getElementById("gyro_stage2_lowpass_hz").innerHTML = "gyro_stage2_lowpass_hz: <span><font color=limegreen>" + res[0][36] + "</span>";
-				document.getElementById("pidSumLimit").innerHTML = "pidSumLimit: <span><font color=limegreen>" + res[0][37] + "</span>";
-				document.getElementById("acc_hardware").innerHTML = "acc_hardware: <span><font color=limegreen>" + res[0][38] + "</span>";
-				document.getElementById("baro_hardware").innerHTML = "baro_hardware: <span><font color=limegreen>" + res[0][39] + "</span>";
-				document.getElementById("mag_hardware").innerHTML = "mag_hardware: <span><font color=limegreen>" + res[0][40] + "</span>";
-				document.getElementById("motor_pwm_rate").innerHTML = "motor_pwm_rate: <span><font color=limegreen>" + res[0][41] + "</span>";
-				document.getElementById("waypoints").innerHTML = "waypoints: <span><font color=limegreen>" + res[0][42] + "</span>";
-				document.getElementById("axisAccelerationLimitYaw").innerHTML = "axisAccelerationLimitYaw: <span><font color=limegreen>" + res[0][43] + "</span>";
-				document.getElementById("axisAccelerationLimitRollPitch").innerHTML = "axisAccelerationLimitRollPitch: <span><font color=limegreen>" + res[0][44] + "</span>";
+				document.getElementById("P_interval").innerHTML = "P_interval: <span><font color=limegreen>" + res[0][0] + "</span>";
+				document.getElementById("minthrottle").innerHTML = "minthrottle: <span><font color=limegreen>" + res[0][1] + "</span>";
+				document.getElementById("maxthrottle").innerHTML = "maxthrottle: <span><font color=limegreen>" + res[0][2] + "</span>";
+				document.getElementById("looptime").innerHTML = "looptime: <span><font color=limegreen>" + res[0][3] + "</span>";
+				document.getElementById("rc_rate").innerHTML = "rc_rate: <span><font color=limegreen>" + res[0][4] + "</span>";
+				document.getElementById("rc_expo").innerHTML = "rc_expo: <span><font color=limegreen>" + res[0][5] + "</span>";
+				document.getElementById("rc_yaw_expo").innerHTML = "rc_yaw_expo: <span><font color=limegreen>" + res[0][6] + "</span>";
+				document.getElementById("thr_mid").innerHTML = "thr_mid: <span><font color=limegreen>" + res[0][7] + "</span>";
+				document.getElementById("thr_expo").innerHTML = "thr_expo: <span><font color=limegreen>" + res[0][8] + "</span>";
+				document.getElementById("tpa_rate").innerHTML = "tpa_rate: <span><font color=limegreen>" + res[0][9] + "</span>";
+				document.getElementById("tpa_breakpoint").innerHTML = "tpa_breakpoint: <span><font color=limegreen>" + res[0][10] + "</span>";
+				document.getElementById("rates").innerHTML = "rates: <span><font color=limegreen>" + res[0][11] + "</span>";
+				document.getElementById("rollPID").innerHTML = "rollPID: <span><font color=limegreen>" + res[0][12] + "</span>";
+				document.getElementById("pitchPID").innerHTML = "pitchPID: <span><font color=limegreen>" + res[0][13] + "</span>";
+				document.getElementById("yawPID").innerHTML = "yawPID: <span><font color=limegreen>" + res[0][14] + "</span>";
+				document.getElementById("altPID").innerHTML = "altPID: <span><font color=limegreen>" + res[0][15] + "</span>";
+				document.getElementById("posPID").innerHTML = "posPID: <span><font color=limegreen>" + res[0][16] + "</span>";
+				document.getElementById("posrPID").innerHTML = "posrPID: <span><font color=limegreen>" + res[0][17] + "</span>";
+				document.getElementById("levelPID").innerHTML = "levelPID: <span><font color=limegreen>" + res[0][18] + "</span>";
+				document.getElementById("magPID").innerHTML = "magPID: <span><font color=limegreen>" + res[0][19] + "</span>";
+				document.getElementById("velPID").innerHTML = "velPID: <span><font color=limegreen>" + res[0][20] + "</span>";
+				document.getElementById("yaw_p_limit").innerHTML = "yaw_p_limit: <span><font color=limegreen>" + res[0][21] + "</span>";
+				document.getElementById("yaw_lpf_hz").innerHTML = "yaw_lpf_hz: <span><font color=limegreen>" + res[0][22] + "</span>";
+				document.getElementById("dterm_lpf_hz").innerHTML = "dterm_lpf_hz: <span><font color=limegreen>" + res[0][23] + "</span>";
+				document.getElementById("dterm_notch_hz").innerHTML = "dterm_notch_hz: <span><font color=limegreen>" + res[0][24] + "</span>";
+				document.getElementById("dterm_notch_cutoff").innerHTML = "dterm_notch_cutoff: <span><font color=limegreen>" + res[0][25] + "</span>";
+				document.getElementById("deadband").innerHTML = "deadband: <span><font color=limegreen>" + res[0][26] + "</span>";
+				document.getElementById("yaw_deadband").innerHTML = "yaw_deadband: <span><font color=limegreen>" + res[0][27] + "</span>";
+				document.getElementById("gyro_lpf").innerHTML = "gyro_lpf: <span><font color=limegreen>" + res[0][28] + "</span>";
+				document.getElementById("gyro_lpf_hz").innerHTML = "gyro_lpf_hz: <span><font color=limegreen>" + res[0][29] + "</span>";
+				document.getElementById("gyro_notch_hz").innerHTML = "gyro_notch_hz: <span><font color=limegreen>" + res[0][30] + "</span>";
+				document.getElementById("gyro_notch_cutoff").innerHTML = "gyro_notch_cutoff: <span><font color=limegreen>" + res[0][31] + "</span>";
+				document.getElementById("acc_lpf_hz").innerHTML = "acc_lpf_hz: <span><font color=limegreen>" + res[0][32] + "</span>";
+				document.getElementById("acc_notch_hz").innerHTML = "acc_notch_hz: <span><font color=limegreen>" + res[0][33] + "</span>";
+				document.getElementById("acc_notch_cutoff").innerHTML = "acc_notch_cutoff: <span><font color=limegreen>" + res[0][34] + "</span>";
+				document.getElementById("gyro_stage2_lowpass_hz").innerHTML = "gyro_stage2_lowpass_hz: <span><font color=limegreen>" + res[0][35] + "</span>";
+				document.getElementById("pidSumLimit").innerHTML = "pidSumLimit: <span><font color=limegreen>" + res[0][36] + "</span>";
+				document.getElementById("acc_hardware").innerHTML = "acc_hardware: <span><font color=limegreen>" + res[0][37] + "</span>";
+				document.getElementById("baro_hardware").innerHTML = "baro_hardware: <span><font color=limegreen>" + res[0][38] + "</span>";
+				document.getElementById("mag_hardware").innerHTML = "mag_hardware: <span><font color=limegreen>" + res[0][39] + "</span>";
+				document.getElementById("motor_pwm_rate").innerHTML = "motor_pwm_rate: <span><font color=limegreen>" + res[0][40] + "</span>";
+				document.getElementById("waypoints").innerHTML = "waypoints: <span><font color=limegreen>" + res[0][41] + "</span>";
+				document.getElementById("axisAccelerationLimitYaw").innerHTML = "axisAccelerationLimitYaw: <span><font color=limegreen>" + res[0][42] + "</span>";
+				document.getElementById("axisAccelerationLimitRollPitch").innerHTML = "axisAccelerationLimitRollPitch: <span><font color=limegreen>" + res[0][43] + "</span>";
 			} else {
 				//console.log(obj.error);
 				//alert("error");
@@ -688,9 +688,9 @@ function plotDraw(dataArray)
 	};
 	
 	var vbat = dataArray.map(function(value,index) { return value['vbat']; });
-	var vbatDec = vbat.map(function(x) { return x/100; }); //normalize
+	//var vbatDec = vbat.map(function(x) { return x/100; }); //normalize
 	var vbatTrace = {
-	  y: vbatDec, 
+	  y: vbat, 
 	  mode: 'lines', 
 	  name: 'V Bat (V)', 
 	  line: {shape: 'spline'}, 
