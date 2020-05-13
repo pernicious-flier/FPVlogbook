@@ -47,7 +47,7 @@ elseif($ext == 'txt')
 		$linenum = 0;
 		$out = '';
 		if ($handle) {
-			while ((($line = fgets($handle)) !== false)&&($linenum<81)) {
+			while ((($line = fgets($handle)) !== false)&&(strpos($out.$line,0xbb)==NULL)){ //stops reading when binary appears with »
 				$out = $out.$line;
 				$linenum=$linenum+1;
 			}
