@@ -22,7 +22,7 @@ if ($handle) {
 				 array(
 				 'alt' => (float)$line[array_search(" BaroAlt (cm)",$titles)],//$line[34],
 				 'rssi' => (float)$line[array_search(" rssi",$titles)],
-				 'vbat' =>  (float)$line[array_search(" vbat (V)",$titles)],
+				 'vbat' =>  (float)$line[array_search(" vbat",$titles)],
 				 'roll' =>  (float)$line[array_search(" attitude[0]",$titles)],
 				 'pitch' =>  (float)$line[array_search(" attitude[1]",$titles)],
 				 'yaw' =>  (float)$line[array_search(" attitude[2]",$titles)],
