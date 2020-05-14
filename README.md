@@ -89,4 +89,4 @@ Under the flight data you have the flight controller setup variables (like pids,
 
 ## License
 
-This project is licensed under GPLv3 - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under GPLv3 - see the [LICENSE](LICENSE) file for details
